@@ -51,7 +51,7 @@ export default class SwapiService {
   }
 
   // Функция берет из JSON только необходимые нам поля для планет
-  _transfromPlanet(planet) {
+  _transfromPlanet = (planet) => {
     return {
       id: this._extractId(planet),
       name: planet.name,
@@ -62,28 +62,28 @@ export default class SwapiService {
   }
 
   // Функция берет из JSON только необходимые нам поля для кораблей
-  _transformStarship(starship) {
+  _transformStarship = (starship) => {
     return {
       id: this._extractId(starship),
       name: starship.name,
       model: starship.model,
       manufacturer: starship.manufacturer,
-      costInCredits: starship.costInCredits,
+      costInCredits: starship.cost_in_credits,
       length: starship.length,
       crew: starship.crew,
       passengers: starship.passengers,
-      cargoCapacity: starship.cargoCapacity
+      cargoCapacity: starship.cargo_capacity
     }
   }
 
   // Функция берет из JSON только необходимые нам поля для людей
-  _transformPerson(person) {
+  _transformPerson = (person) => {
     return {
       id: this._extractId(person),
       name: person.name,
       gender: person.gender,
-      birthYear: person.birthYear,
-      eyeColor: person.eyeColor
+      birthYear: person.birth_year,
+      eyeColor: person.eye_color
     }
   }
 
