@@ -1,48 +1,50 @@
 import React, { Component } from 'react';
 
 import Preloader from '../preloader';
-import SwapiService from '../../services/swapi-service';
 
 import './item-list.css';
 
 export default class ItemList extends Component {
 
-  swapiService = new SwapiService();
-
   state = {
-    peopleList: null
+    itemList: null
   };
 
   componentDidMount() {
-    this.swapiService
-      .getAllPeople()
-      .then((peopleList) => {
+    const { getData } = this.props;
+
+    getData()
+      .then((itemList) => {
         this.setState({
-          peopleList
+          itemList
         });
       });
   }
 
   renderItems(arr) {
-    return arr.map(({ id, name }) => {
+    return arr.map((item) => {
+      const { id } = item;
+
+      /* Метод children обекта props дает доступ к тому, что мы передали в тело этого элемента.
+         В методе children может быть любой тип данных(втч. блок JSX кода): строка, функция, объект и т.д. */
+      const label = this.props.children(item);
       return (
         <li className="list-group-item"
           key={id}
           /* Объект props сущ. всегда, из него можно получить доступ к данным, 
           передаваемым в данный эл-т в кач-ве атрибутов */
           onClick={() => this.props.onItemSelected(id)}>
-          {name}
+          {label}
         </li>
       );
     });
   }
 
   render() {
-    const { peopleList } = this.state;
+    const { itemList } = this.state;
 
-    if (!peopleList) return <Preloader />;
-
-    const items = this.renderItems(peopleList);
+    if (!itemList) return <Preloader />;
+    const items = this.renderItems(itemList);
 
     return (
       <ul className="item-list list-group">

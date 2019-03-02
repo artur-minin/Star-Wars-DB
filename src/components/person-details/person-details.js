@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import ErrorBoundary from '../error-boundary';
 import Preloader from '../preloader';
 import SwapiService from "../../services/swapi-service";
 import './person-details.css';
@@ -26,19 +27,15 @@ export default class PersonDetails extends Component {
     /* Если текущее значение personId не соответствует значению personId из предыдущего объекта props, 
        то текущее значение personId обновляется с помощью функции updatePerson */
     if (this.props.personId !== prevProps.personId) {
-      this.setState({
-        loading: true
-      })
+      this.setState({ loading: true });
       this.updatePerson();
     }
+    
   }
 
   updatePerson() {
    const { personId } = this.props;
-    if (!personId) {
-      return;
-    }
-
+    if (!personId) { return };
 
     this.swapiService
       .getPerson(personId)
@@ -78,20 +75,20 @@ export default class PersonDetails extends Component {
   }
 
   render() {
-    if (!this.state.person) {
-      return <span>Select a person from a list</span>;
-    }
-
     const { person, loading } = this.state;
 
-    const items = this.renderDetails(person);
+    if (!person) {
+      return <span className='alternative'>Select a person from a list</span>;
+    }
 
+    const items = this.renderDetails(person);
     const content = loading ? <Preloader /> : items;
     
-
     return (
       <div className="person-details card">
-        { content }        
+        <ErrorBoundary>
+          {content}        
+        </ErrorBoundary>
       </div>
     )
 
