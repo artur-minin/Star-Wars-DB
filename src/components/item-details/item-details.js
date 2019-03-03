@@ -16,7 +16,7 @@ const Record = ({ item, field, label }) => {
 
 export {
   Record
-}
+};
 
 export default class ItemDetails extends Component {
 
@@ -46,8 +46,11 @@ export default class ItemDetails extends Component {
   }
 
   updateItem() {
-   const { itemId, getData, getImageUrl } = this.props;
-    if (!itemId) { return };
+    const { itemId, getData, getImageUrl } = this.props;
+    
+    if (!itemId) {
+      return;
+    };
 
     getData(itemId)
       .then((item) => {
@@ -92,7 +95,7 @@ export default class ItemDetails extends Component {
 
     if (!item) {
       return <span className='alternative'>Select item from list</span>;
-    }
+    };
 
     const items = this.renderDetails(item, image);
     const content = loading ? <Preloader /> : items;
@@ -100,10 +103,10 @@ export default class ItemDetails extends Component {
     return (
       <ErrorBoundary>
         <div className="item-details card">
-          {content}        
+          {content}
         </div>
       </ErrorBoundary>
-    )
+    );
 
-  }
-}
+  };
+};
