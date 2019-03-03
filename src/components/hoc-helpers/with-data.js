@@ -5,8 +5,8 @@ import Preloader from '../preloader';
 // hoc - higher ordered components(Компоненты высшего порядка) - функции, которые оборачивают компонент
 
 /* Компонент withData оборачивает компонент и предоставляет ему данные для рендеринга, 
-   взяв всю логику работы с данными на себя */
-const withData = (View, getData) => {
+   взяв всю логику работы с данными на себя. */
+const withData = (View) => {
   // Функция возвращает анонимный класс
   return class extends Component {
 
@@ -16,7 +16,7 @@ const withData = (View, getData) => {
 
     componentDidMount() {
 
-      getData()
+      this.props.getData()
         .then((data) => {
           this.setState({
             data
