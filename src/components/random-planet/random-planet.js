@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Preloader from '../preloader';
 import ErrorBoundary from '../error-boundary';
@@ -7,6 +8,20 @@ import SwapiService from '../../services/swapi-service';
 import './random-planet.css';
 
 export default class RandomPlanet extends Component {
+
+  /* Значения по-молчанию для компонента.
+     Аналогичны параметрам по-умолчанию у функций. */
+  static defaultProps = {
+    /* Если параметр updateInterval не будет передан в компонент, 
+       то по - умолчанию он преобразуется в число 5000 */ 
+    updateInterval: 5000
+  }
+
+  /* Определяет тип параметров компонента. */
+  static propTypes = {
+    // Параметр updateInterval должен быть числом(number)
+    updateInterval: PropTypes.number
+  }
 
   swapiService = new SwapiService();
 
@@ -18,14 +33,15 @@ export default class RandomPlanet extends Component {
   /* Метод "componentDidMount" автоматически вызывается когда элемент уже отрисован и находится на странице.
      Можно использовать вместо конструктора (как в данном случае) */
   componentDidMount() {
+    const { updateInterval } = this.props;
     this.updatePlanet()
-    this.interval = setInterval( this.updatePlanet, 5000);
+    this.interval = setInterval( this.updatePlanet, updateInterval);
   }
 
   /* Метод "componentWillUnmount" автоматически вызывается перед тем как элемент будет удален.
      На момент вызова метода DOM-дерево еще содержит данный компонент. */
   componentWillUnmount() {
-    clearInterval = this.interval;
+    clearInterval = (this.interval);
   }
 
   // Функция получает объект с необходимыми св-ми из swapi-service и перезаписывает в state эти данные

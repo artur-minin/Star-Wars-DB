@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ErrorBoundary from '../error-boundary';
 
@@ -20,7 +21,8 @@ const ItemList = (props) => {
     const label = renderLabel(item);
 
     return (
-      <li className="list-group-item"
+      <li
+        className="list-group-item"
         key={id}
         onClick={() => onItemSelected(id)}>
         {label}
@@ -36,5 +38,22 @@ const ItemList = (props) => {
     </ErrorBoundary>
   );
 }
+
+/* Параметры по-умолчанию для компонента. 
+   Аналогичны параметрам по - умолчанию для функций. */
+ItemList.defaultProps = {
+  // Если параметр onItemSelected не будет передан в компонент, то по-умолчанию он преобразуется в пустую функцию 
+  onItemSelected: () => { }
+};
+
+/* propTypes определяет тип параметров для компонента. */
+ItemList.propTypes = {
+  // Параметр onItemSelected должен быть передан в виде функции(func)
+  onItemSelected: PropTypes.func,
+  // Параметр data должен обязательно передан в компонент(isRequired) в виде массивом(arrayOf) объектов(object) 
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // Параметр children должен быть обязательно передан в компонент(isRequired) в виде функции(func)
+  children: PropTypes.func.isRequired
+};
 
 export default ItemList;

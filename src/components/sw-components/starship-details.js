@@ -26,5 +26,5 @@ const mapMethodsToProps = (swapiService) => {
 
 
 // При вызове PersonDetails withSwapiService позаботится о том, чтобы в StarshipDetails было св-во swapiService
-export default withSwapiService(StarshipDetails, mapMethodsToProps);
+export default withSwapiService(mapMethodsToProps)(StarshipDetails);
 

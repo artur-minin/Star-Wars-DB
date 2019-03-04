@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './row.css';
 
@@ -15,5 +16,14 @@ const Row = ({ left, right }) => {
     </div>
   );
 };
+
+Row.propTypes = {
+  /* Параметр left должен быть передан в компонент в виде того, 
+     что может быть отренедено(числа, строки, элементы DOM, массивы). */
+  left: PropTypes.node,
+  /* Параметр right должен быть передан в компонент в виде того, 
+     что может быть отренедено(числа, строки, элементы DOM, массивы). */
+  right: PropTypes.node
+}
 
 export default Row;

@@ -98,6 +98,7 @@ export default class ItemDetails extends Component {
     };
 
     const items = this.renderDetails(item, image);
+
     const content = loading ? <Preloader /> : items;
     
     return (

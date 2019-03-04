@@ -1,7 +1,10 @@
 import React from 'react';
 import { SwapiServiceConsumer } from '../swapi-service-context';
 
-const withSwapiService = (Wrapped, mapMethodsToProps) => {
+/* withSwapiService - функция, возвращающая функцию.
+                      В первую функцию передаем параметр, отвечающий за выбор метода для отбора данных(mapMethodsToProps).
+                      Во вторую функцию передаем элемент в который эти данные будут передаваться. */
+const withSwapiService = (mapMethodsToProps) => (Wrapped) => {
 
   return (props) => {
     return (
