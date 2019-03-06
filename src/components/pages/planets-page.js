@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PlanetDetails, PlanetList } from '../sw-components';
 import Row from '../row';
+// Страница создана без использования react-router
 
 export default class PlanetsPage extends Component {
 

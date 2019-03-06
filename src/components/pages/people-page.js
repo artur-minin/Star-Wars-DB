@@ -1,25 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { PersonDetails, PersonList } from '../sw-components';
 import Row from '../row';
+// Страница создана с использованием react-router
 
-export default class PeoplePage extends Component {
+// Деструктурируем св-ва history и match из компонента withRouter
+const PeoplePage = ({ history, match }) => {
 
-  state = {
-    selectedItem: null
-  };
+  const { id } = match.params;
 
-  onItemSelected = (selectedItem) => {
-    this.setState({ selectedItem });
-  };
+  return (
+    <Row
+      /* Объект history работает с историей браузера.
+         history.push(id) прибавляет путь id в к адресной строке.*/
+      left = {<PersonList onItemSelected = { (id) => history.push(id) } />}
+      right = {<PersonDetails itemId = { id } />} />
+  );
+};
 
-  render() {
-    const { selectedItem } = this.state;
-
-    return (
-      <Row
-        left={<PersonList onItemSelected={this.onItemSelected} />}
-        right={<PersonDetails itemId={selectedItem} />} />
-    );
-  }
-
-}
+export default withRouter(PeoplePage);
