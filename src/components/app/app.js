@@ -70,7 +70,7 @@ export default class App extends Component {
                     onLogin = { this.onLogin }/>
                 )} />
                 
-                <Route render={() => <h2>Page not found</h2>} />
+                <Route render={() => <h2>Page not found!</h2>} />
               </Switch>
 
             </React.Fragment>
